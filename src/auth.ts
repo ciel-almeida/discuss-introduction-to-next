@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import GitHub from '@auth/core/providers/github';
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import { db } from '@/app/db';
+import { db } from '@/db';
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
@@ -26,9 +26,16 @@ export const {
 	callbacks: {
 		// Usually not needed, here we are fixing a bug in this NextAuth version
 		async session({ session, user }: any) {
-			if (session & user) {
+			if (session && user) {
 				session.user.id = user.id;
 			}
+			// session.id = user.id;
+			console.log('user from auth:', user);
+			console.log('session from auth:', session);
+			// return {
+			// 	session,
+			// 	user.id
+			// }
 			return session;
 		},
 	},
