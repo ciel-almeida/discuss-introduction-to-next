@@ -29,13 +29,7 @@ export const {
 			if (session && user) {
 				session.user.id = user.id;
 			}
-			// session.id = user.id;
-			console.log('user from auth:', user);
-			console.log('session from auth:', session);
-			// return {
-			// 	session,
-			// 	user.id
-			// }
+
 			return session;
 		},
 	},
